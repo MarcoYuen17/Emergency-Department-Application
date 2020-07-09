@@ -4,6 +4,7 @@ import model.exceptions.StaffClockedInException;
 import model.people.Nurse;
 import model.people.Staff;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents the staff currently on shift in the Emergency Department
@@ -13,11 +14,12 @@ public class ActiveStaff {
 
     private static ActiveStaff instance = null;
     private ArrayList<Staff> listOfActiveStaff;
-    public static ArrayList<Nurse> activeNurses = new ArrayList<>();
+    public static ArrayList<Nurse> activeNurses;
 
     // EFFECTS: Constructs new active staff lists
     private ActiveStaff() {
         listOfActiveStaff = new ArrayList<>();
+        activeNurses = new ArrayList<>();
     }
 
     // EFFECTS: Returns single instance of ActiveStaff or new ActiveStaff if null
@@ -42,8 +44,13 @@ public class ActiveStaff {
             throw new StaffClockedInException(staff.getPosition() + " " + staff.getFullName()
                     + " is already clocked in.");
         }
+
         staff.setShift(shift);
         listOfActiveStaff.add(staff);
+
+        if (staff.getPosition().equals("Nurse")) {
+            activeNurses.add((Nurse) staff);
+        }
     }
 
     // MODIFIES: this
@@ -69,6 +76,22 @@ public class ActiveStaff {
     // EFFECTS: Returns list of active staff
     public ArrayList<Staff> getListOfActiveStaff() {
         return listOfActiveStaff;
+    }
+
+    // EFFECTS: Returns list of active nurses
+    public ArrayList<Nurse> getListOfActiveNurses() {
+        return activeNurses;
+    }
+
+    // EFFECTS: Returns list of active staff other than nurses()
+    public List<Staff> getListOfActiveOtherStaff() {
+        List<Staff> otherStaff = new ArrayList<>();
+        for (Staff staff: listOfActiveStaff) {
+            if (staff.getPosition() != "Nurse") {
+                otherStaff.add(staff);
+            }
+        }
+        return otherStaff;
     }
 
     // EFFECTS: Returns all staff and corresponding shift on separate lines (for JLabel)

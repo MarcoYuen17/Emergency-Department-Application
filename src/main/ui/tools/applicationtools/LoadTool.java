@@ -75,7 +75,7 @@ public class LoadTool extends Tool {
         }
 
         // MODIFIES: allRooms, CheckedInPatients
-        // EFFECTS: Loads patients from PATIENTS_FILE if the file exists
+        // EFFECTS: Loads patients from PATIENTS_FILE if the file exists //TODO: add "and checks them in" and same for other People below, but maybe do this in Decoder instead?
         private String loadPatients(String resultSoFar) {
             try {
                 java.util.List<Patient> patients = Reader.readPatients(new File(PATIENTS_FILE));

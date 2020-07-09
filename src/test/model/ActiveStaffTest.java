@@ -4,8 +4,11 @@ import model.exceptions.StaffClockedInException;
 import model.people.Doctor;
 import model.people.Nurse;
 import model.people.Receptionist;
+import model.people.Staff;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -116,6 +119,47 @@ public class ActiveStaffTest {
             fail("StaffClockedInException was thrown");
         }
         assertEquals(testActiveStaff.getListOfActiveStaff(), testActiveStaff.getListOfActiveStaff());
+    }
+
+    @Test
+    public void testGetListOfActiveNurses() {
+        Doctor anotherDoctor = new Doctor("Very", "New");
+        Nurse anotherNurse = new Nurse("Big", "Xp");
+        try {
+            testActiveStaff.clockIn(testReceptionist, "0100-0900");
+            testActiveStaff.clockIn(testNurse, "0200-1000");
+            testActiveStaff.clockIn(anotherDoctor, "0130-0930");
+            testActiveStaff.clockIn(anotherNurse, "0400-1200");
+            testActiveStaff.clockIn(testDoctor, "0600-1400");
+        } catch (StaffClockedInException e) {
+            fail("StaffClockedInException was thrown.");
+        }
+
+        List<Nurse> activeNurses = testActiveStaff.getListOfActiveNurses();
+        assertEquals(2, activeNurses.size());
+        assertEquals(testNurse, activeNurses.get(0));
+        assertEquals(anotherNurse, activeNurses.get(1));
+    }
+
+    @Test
+    public void testGetListOfOtherActiveStaff() {
+        Doctor anotherDoctor = new Doctor("Very", "New");
+        Nurse anotherNurse = new Nurse("Big", "Xp");
+        try {
+            testActiveStaff.clockIn(testReceptionist, "0100-0900");
+            testActiveStaff.clockIn(testNurse, "0200-1000");
+            testActiveStaff.clockIn(anotherDoctor, "0130-0930");
+            testActiveStaff.clockIn(anotherNurse, "0400-1200");
+            testActiveStaff.clockIn(testDoctor, "0600-1400");
+        } catch (StaffClockedInException e) {
+            fail("StaffClockedInException was thrown.");
+        }
+
+        List<Staff> otherStaff = testActiveStaff.getListOfActiveOtherStaff();
+        assertEquals(3, otherStaff.size());
+        assertEquals(testReceptionist, otherStaff.get(0));
+        assertEquals(anotherDoctor, otherStaff.get(1));
+        assertEquals(testDoctor, otherStaff.get(2));
     }
 
     @Test

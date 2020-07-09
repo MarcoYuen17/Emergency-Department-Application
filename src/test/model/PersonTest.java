@@ -14,7 +14,17 @@ public class PersonTest {
     private Staff testStaff = new Staff("Testy", "Tester");
 
     @Test
-    public void testGetName() {
+    public void testGetFullName() {
         assertEquals("Testy Tester", testStaff.getFullName());
+    }
+
+    @Test
+    public void testGetFirstName() {
+        assertEquals("Testy", testStaff.getFirstName());
+    }
+
+    @Test
+    public void testGetLastName() {
+        assertEquals("Tester", testStaff.getLastName());
     }
 }

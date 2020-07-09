@@ -17,11 +17,11 @@ public abstract class Tool {
     public static String blankLineLabelText = "                                                                        "
             + "                                                                                                      ";
 
-    public static final String PATIENTS_FILE = "./data/patients.txt";
+    public static final String PATIENTS_FILE = "./data/patients.txt"; //TODO: Move to save file?
     public static final String NURSES_FILE = "./data/nurses.txt";
     public static final String OTHER_STAFF_FILE = "./data/otherstaff.txt";
 
-    public Tool(EmergencyDepartment ed, JComponent parent) {
+    public Tool(EmergencyDepartment ed, JComponent parent) { //TODO: add dropdown menus for checkins & clockins
         this.ed = ed;
         createButton(parent);
         addToParent(parent);

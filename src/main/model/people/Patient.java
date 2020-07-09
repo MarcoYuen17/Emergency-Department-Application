@@ -24,7 +24,7 @@ public class Patient extends Person implements Saveable {
     private int roomNumberToAssign;
 
     // EFFECTS: Constructs new patient with parameters in order
-    public Patient(String firstName, String lastName, int dob, int id, int timeIn,
+    public Patient(String firstName, String lastName, int dob, int id, int timeIn, //TODO: Use built-in Time?
                    int urgency, String reasonForVisit, String precautions, String allergies, String medications) {
 
         room = null;
@@ -58,7 +58,7 @@ public class Patient extends Person implements Saveable {
         this.precautions = precautions;
         this.allergies = allergies;
         this.medications = medications;
-        this.roomNumberToAssign = roomNumberToAssign;
+        this.roomNumberToAssign = roomNumberToAssign; //TODO: instead just assign patient to room
     }
 
     // EFFECTS: Returns patient's room
@@ -174,7 +174,7 @@ public class Patient extends Person implements Saveable {
     }
 
     // EFFECTS: Returns room number for saving
-    private int printRoomNumberToSave() {
+    public int printRoomNumberToSave() {
         if (room == null) {
             return 0;
         } else {

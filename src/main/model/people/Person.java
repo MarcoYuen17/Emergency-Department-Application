@@ -15,4 +15,13 @@ public class Person {
         return firstName + " " + lastName;
     }
 
+    // EFFECTS: Returns person's first name
+    public String getFirstName() {
+        return firstName;
+    }
+
+    // EFFECTS: Returns person's last name
+    public String getLastName() {
+        return lastName;
+    }
 }
