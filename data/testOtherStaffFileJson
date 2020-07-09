@@ -1,0 +1,21 @@
+[{
+  "position": "Doctor",
+  "firstName": "Docty",
+  "lastName": "Doc",
+  "shift": "0130-0930"
+}, {
+  "position": "Doctor",
+  "firstName": "ER",
+  "lastName": "Master",
+  "shift": "1500-2300"
+}, {
+  "position": "Receptionist",
+  "firstName": "Clerky",
+  "lastName": "Clerk",
+  "shift": "0000-0800"
+}, {
+  "position": "Receptionist",
+  "firstName": "Head",
+  "lastName": "Desk",
+  "shift": "0800-1600"
+}]
