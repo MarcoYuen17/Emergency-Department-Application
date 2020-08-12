@@ -17,9 +17,9 @@ public abstract class Tool {
     public static String blankLineLabelText = "                                                                        "
             + "                                                                                                      ";
 
-    public static final String PATIENTS_FILE = "./data/patients.txt";
-    public static final String NURSES_FILE = "./data/nurses.txt";
-    public static final String OTHER_STAFF_FILE = "./data/otherstaff.txt";
+    protected static final String PATIENTS_FILE_PATH = "./data/patients.json";
+    protected static final String NURSES_FILE_PATH = "./data/nurses.json";
+    protected static final String OTHER_STAFF_FILE_PATH = "./data/otherstaff.json";
 
     public Tool(EmergencyDepartment ed, JComponent parent) {
         this.ed = ed;

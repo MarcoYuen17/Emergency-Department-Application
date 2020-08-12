@@ -138,7 +138,6 @@ public class StaffClockInTool extends Tool {
                     } else if (position.equals("Nurse")) {
                         Nurse nurse = new Nurse(firstName, lastName, shift);
                         activeStaff.clockIn(nurse, shift);
-                        activeNurses.add(nurse);
                         return "Nurse " + nurse.getFullName() + " has been clocked in for " + shift + ".";
                     } else if (position.equals("Receptionist")) {
                         Receptionist receptionist = new Receptionist(firstName, lastName, shift);

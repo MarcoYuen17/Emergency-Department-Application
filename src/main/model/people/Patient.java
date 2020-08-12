@@ -1,16 +1,12 @@
 package model.people;
 
 import model.rooms.Room;
-import persistence.Reader;
-import persistence.Saveable;
-
-import java.io.PrintWriter;
 
 /**
  * Represents a patient in the Emergency Department
  */
 
-public class Patient extends Person implements Saveable {
+public class Patient extends Person {
 
     private String fullName;
     private Room room;
@@ -147,34 +143,8 @@ public class Patient extends Person implements Saveable {
                 + "Allergies: " + allergies + "<br/>" + "Medications: " + medications + "<br/></html>";
     }
 
-    // EFFECTS: Saves patient to file
-    @Override
-    public void save(PrintWriter printWriter) {
-        printWriter.print(firstName);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(lastName);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(dob);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(id);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(timeCheckedIn);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(urgency);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(reasonForVisit);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(precautions);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(allergies);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(medications);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(printRoomNumberToSave());
-    }
-
     // EFFECTS: Returns room number for saving
-    private int printRoomNumberToSave() {
+    public int printRoomNumberToSave() { //TODO: Needed?
         if (room == null) {
             return 0;
         } else {

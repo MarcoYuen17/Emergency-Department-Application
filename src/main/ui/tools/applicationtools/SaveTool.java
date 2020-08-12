@@ -1,11 +1,8 @@
 package ui.tools.applicationtools;
 
+import persistence.Encoder;
 import model.ActiveStaff;
 import model.CheckedInPatients;
-import model.people.Nurse;
-import model.people.Patient;
-import model.people.Staff;
-import persistence.Writer;
 import ui.EmergencyDepartment;
 import ui.tools.Tool;
 
@@ -13,11 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
-
-import static model.ActiveStaff.activeNurses;
+import java.io.IOException;
 
 /**
  * Represents a GUI tool to save patients, nurses, and other staff to file
@@ -68,62 +61,40 @@ public class SaveTool extends Tool {
             return result;
         }
 
-        // From https://github.students.cs.ubc.ca/CPSC210/TellerApp
-
         // MODIFIES: PATIENTS_FILE
         // EFFECTS: Saves patients to PATIENTS_FILE
         private String savePatients(String resultSoFar) {
             try {
-                Writer writer = new Writer(new File(PATIENTS_FILE));
-                for (Patient p: CheckedInPatients.getInstance().listOfCheckedInPatients()) {
-                    writer.write(p);
-                }
-                writer.close();
-                return resultSoFar + "Patients saved to file " + PATIENTS_FILE + ".<br><br>";
-            } catch (FileNotFoundException e) {
-                return resultSoFar + "Unable to save patients to " + PATIENTS_FILE + ". (File not found)<br><br>";
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                Encoder.encodePatients(CheckedInPatients.getInstance().listOfCheckedInPatients(), PATIENTS_FILE_PATH);
+                return resultSoFar + "Patients saved to file " + PATIENTS_FILE_PATH + ".<br><br>";
+            } catch (IOException e) {
+                return resultSoFar + "An error occurred when saving the patients to " + PATIENTS_FILE_PATH
+                        + ". (IOException)<br><br>";
             }
-            return resultSoFar + "An error occurred when saving the patients to " + PATIENTS_FILE + ".<br><br>";
         }
 
         // MODIFIES: NURSES_FILE
         // EFFECTS: Saves nurses to NURSES_FILE
         private String saveNurses(String resultSoFar) {
             try {
-                Writer writer = new Writer(new File(NURSES_FILE));
-                for (Nurse n: activeNurses) {
-                    writer.write(n);
-                }
-                writer.close();
-                return resultSoFar + "Nurses saved to file " + NURSES_FILE + ".<br><br>";
-            } catch (FileNotFoundException e) {
-                return resultSoFar + "Unable to save nurses to " + NURSES_FILE + ". (File not found)<br><br>";
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                Encoder.encodeNurses(ActiveStaff.getInstance().getListOfActiveNurses(), NURSES_FILE_PATH);
+                return resultSoFar + "Nurses saved to file " + NURSES_FILE_PATH + ".<br><br>";
+            } catch (IOException e) {
+                return resultSoFar + "An error occurred when saving the nurses to " + NURSES_FILE_PATH
+                        + ". (IOException)<br><br>";
             }
-            return resultSoFar + "An error occurred when saving the nurses to " + NURSES_FILE + ".<br><br>";
         }
 
         // MODIFIES: OTHER_STAFF_FILE
         // EFFECTS: Saves other staff to OTHER_STAFF_FILE
         private String saveOtherStaff(String resultSoFar) {
             try {
-                Writer writer = new Writer(new File(OTHER_STAFF_FILE));
-                for (Staff s: ActiveStaff.getInstance().getListOfActiveStaff()) {
-                    if (!s.getPosition().equals("Nurse")) {
-                        writer.write(s);
-                    }
-                }
-                writer.close();
-                return resultSoFar + "Other staff saved to file " + OTHER_STAFF_FILE + ".";
-            } catch (FileNotFoundException e) {
-                return resultSoFar + "Unable to save other staff to " + OTHER_STAFF_FILE + ". (File not found)";
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                Encoder.encodeOtherStaff(ActiveStaff.getInstance().getListOfActiveOtherStaff(), OTHER_STAFF_FILE_PATH);
+                return resultSoFar + "Other staff saved to file " + OTHER_STAFF_FILE_PATH + ".";
+            } catch (IOException e) {
+                return resultSoFar + "An error occurred when saving the other staff to " + OTHER_STAFF_FILE_PATH
+                        + ". (IOException)";
             }
-            return resultSoFar + "An error occurred when saving the other staff to file " + OTHER_STAFF_FILE + ".";
         }
     }
 }

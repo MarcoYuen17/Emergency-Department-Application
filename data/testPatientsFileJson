@@ -1,0 +1,25 @@
+[{
+  "firstName": "Biggie",
+  "lastName": "Cheese",
+  "dob": 20001014,
+  "id": 12345,
+  "timeCheckedIn": 1130,
+  "urgency": 1,
+  "reasonForVisit": "Headache",
+  "precautions": "None",
+  "allergies": "Peanuts",
+  "medications": "Zofran",
+  "roomNumberToAssign": 0
+}, {
+  "firstName": "Another",
+  "lastName": "Patient",
+  "dob": 20090903,
+  "id": 2666,
+  "timeCheckedIn": 1900,
+  "urgency": 3,
+  "reasonForVisit": "First seizure",
+  "precautions": "None",
+  "allergies": "None",
+  "medications": "Lotriderm",
+  "roomNumberToAssign": 101
+}]

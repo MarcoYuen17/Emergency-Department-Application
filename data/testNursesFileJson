@@ -1,0 +1,16 @@
+[{
+  "firstName": "Nursy",
+  "lastName": "Nur",
+  "shift": "0100-0900",
+  "roomNumbersToAssign": [101]
+}, {
+  "firstName": "Another",
+  "lastName": "Nurse",
+  "shift": "0500-1300",
+  "roomNumbersToAssign": [102, 103]
+}, {
+  "firstName": "Last",
+  "lastName": "One",
+  "shift": "0700-1500",
+  "roomNumbersToAssign": [0]
+}]

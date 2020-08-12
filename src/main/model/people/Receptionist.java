@@ -1,12 +1,10 @@
 package model.people;
 
-import persistence.Saveable;
-
 /**
  * Represents a receptionist in the Emergency Department
  */
 
-public class Receptionist extends Staff implements Saveable {
+public class Receptionist extends Staff {
 
     // EFFECTS: Constructs a new receptionist with first name and last name with Receptionist position
     public Receptionist(String firstName, String lastName) {
