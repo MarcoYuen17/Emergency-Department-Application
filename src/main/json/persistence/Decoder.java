@@ -21,7 +21,7 @@ public class Decoder {
     private static JSONParser jsonParser = new JSONParser();
 
     public static List<Patient> decodePatients(File file) throws IOException, ParseException {
-        FileReader reader = new FileReader(file); //TODO: this should be put in the method argument instead
+        FileReader reader = new FileReader(file);
         Object parsedPatientArrayObject = jsonParser.parse(reader);
         JSONArray jsonPatientArray = (JSONArray) parsedPatientArrayObject;
         List<Patient> patients = new ArrayList<>();
@@ -50,7 +50,7 @@ public class Decoder {
     }
 
     public static List<Nurse> decodeNurses(File file) throws IOException, ParseException {
-        FileReader reader = new FileReader(file); //TODO: this should be moved to method arguments
+        FileReader reader = new FileReader(file);
         Object parsedNurseArrayObject = jsonParser.parse(reader);
         JSONArray jsonNurseArray = (JSONArray) parsedNurseArrayObject;
         List<Nurse> nurses = new ArrayList<>();
@@ -75,7 +75,7 @@ public class Decoder {
     }
 
     public static List<Staff> decodeOtherStaff(File file) throws IOException, ParseException {
-        FileReader reader = new FileReader(file); //TODO: this should be moved to method arguments
+        FileReader reader = new FileReader(file);
         Object parsedOtherStaffArrayObject = jsonParser.parse(reader);
         JSONArray jsonOtherStaffArray = (JSONArray) parsedOtherStaffArrayObject;
         List<Staff> otherStaff = new ArrayList<>();

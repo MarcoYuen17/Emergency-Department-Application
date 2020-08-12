@@ -1,7 +1,7 @@
 package model.people;
 
-import persistence.Reader;
-import persistence.Saveable;
+import deprecated.persistence.Reader;
+import deprecated.persistence.Saveable;
 
 import java.io.PrintWriter;
 

@@ -20,10 +20,6 @@ import java.util.List;
 
 public class Encoder {
 
-    public static final String PATIENTS_FILE_JSON = "./data/patients.json"; //TODO: Shouldn't be here
-    public static final String NURSES_FILE_JSON = "./data/nurses.json";
-    public static final String OTHER_STAFF_FILE_JSON = "./data/otherstaff.json";
-
     public static void encodePatients(Collection<Patient> patients, String filePath) throws IOException {
         JSONArray patientsJsonArrayObject = new JSONArray();
 

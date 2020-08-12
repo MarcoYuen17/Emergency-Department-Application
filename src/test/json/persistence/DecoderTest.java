@@ -35,8 +35,8 @@ public class DecoderTest {
             assertEquals("None", patient1.getPrecautions());
             assertEquals("Peanuts", patient1.getAllergies());
             assertEquals("Zofran", patient1.getMedications());
-            assertEquals(0, patient1.getRoomNumberToAssign()); //TODO: this could be removed when Patient TODO is complete
-            assertNull(patient1.getLocation()); //TODO: this should be changed when patient TODO is complete
+            assertEquals(0, patient1.getRoomNumberToAssign());
+            assertNull(patient1.getLocation());
 
             Patient patient2 = patients.get(1);
             assertEquals("Another Patient", patient2.getFullName());
@@ -50,7 +50,7 @@ public class DecoderTest {
             assertEquals("Lotriderm", patient2.getMedications());
             assertEquals(101, patient2.getRoomNumberToAssign());
         } catch (IOException e) {
-            fail("An IOException was thrown when decoding the patient file.");;
+            fail("An IOException was thrown when decoding the patient file.");
         } catch (ParseException e) {
             fail("A ParseException was thrown when decoding the patient file.");
         }
@@ -67,7 +67,7 @@ public class DecoderTest {
             assertEquals("Nursy Nur", nurse1.getFullName());
             assertEquals("0100-0900", nurse1.getShift());
             assertEquals(0, nurse1.findAssignedRooms().size());
-            assertEquals(1, nurse1.getRoomNumbersToAssign().size()); //TODO: this could be changed so that nurses are assigned rooms upon reinstantiation
+            assertEquals(1, nurse1.getRoomNumbersToAssign().size());
             assertEquals(101, nurse1.getRoomNumbersToAssign().get(0));
             assertEquals("Nurse", nurse1.getPosition());
 

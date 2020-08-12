@@ -1,5 +1,6 @@
 package ui.tools.applicationtools;
 
+import json.persistence.Decoder;
 import model.ActiveStaff;
 import model.CheckedInPatients;
 import model.exceptions.PatientCheckedInException;
@@ -8,7 +9,7 @@ import model.people.Nurse;
 import model.people.Patient;
 import model.people.Staff;
 import model.rooms.Room;
-import persistence.Reader;
+import org.json.simple.parser.ParseException;
 import ui.EmergencyDepartment;
 import ui.tools.Tool;
 
@@ -21,7 +22,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static model.ActiveStaff.activeNurses;
 import static model.rooms.Room.allRooms;
 
 /**
@@ -75,10 +75,10 @@ public class LoadTool extends Tool {
         }
 
         // MODIFIES: allRooms, CheckedInPatients
-        // EFFECTS: Loads patients from PATIENTS_FILE if the file exists //TODO: add "and checks them in" and same for other People below, but maybe do this in Decoder instead?
+        // EFFECTS: Loads patients from PATIENTS_FILE if the file exists and checks them in
         private String loadPatients(String resultSoFar) {
             try {
-                java.util.List<Patient> patients = Reader.readPatients(new File(PATIENTS_FILE));
+                List<Patient> patients = Decoder.decodePatients(new File(PATIENTS_FILE_PATH));
                 for (Patient p: patients) {
                     CheckedInPatients.getInstance().checkInPatient(p);
                     int roomNumberToAssign = p.getRoomNumberToAssign();
@@ -92,21 +92,22 @@ public class LoadTool extends Tool {
                 }
                 return resultSoFar + "All patients loaded.<br><br>";
             } catch (IOException e) {
-                return resultSoFar + "Patient file not found - No patients loaded.<br><br>";
+                return resultSoFar + createErrorMessage("patients", "IOException");
+            } catch (ParseException e) {
+                return resultSoFar + createErrorMessage("patients", "ParseException");
             } catch (PatientCheckedInException e) {
-                return resultSoFar + "An error occurred while loading the patients file - No patients loaded.<br><br>";
+                return resultSoFar + createErrorMessage("patients", "PatientCheckedInException");
             }
         }
 
         // MODIFIES: allRooms, ActiveStaff, activeNurses
-        // EFFECTS: Loads nurses from NURSES_FILE if the file exists
+        // EFFECTS: Loads nurses from NURSES_FILE if the file exists and clocks them in
         private String loadNurses(String resultSoFar) {
             try {
-                java.util.List<Nurse> nurses = Reader.readNurses(new File(NURSES_FILE));
+                List<Nurse> nurses = Decoder.decodeNurses(new File(NURSES_FILE_PATH));
                 for (Nurse n: nurses) {
                     String shift = n.getShift();
                     ActiveStaff.getInstance().clockIn(n, shift);
-                    activeNurses.add(n);
                     ArrayList<Integer> roomNumsToAssign = n.getRoomNumbersToAssign();
                     for (int roomToAssign: roomNumsToAssign) {
                         for (Room r: allRooms) {
@@ -118,28 +119,41 @@ public class LoadTool extends Tool {
                 }
                 return resultSoFar + "All nurses loaded.<br><br>";
             } catch (IOException e) {
-                return resultSoFar + "Nurse file not found - No nurses loaded.<br><br>";
+                return resultSoFar + createErrorMessage("nurses", "IOException");
+            } catch (ParseException e) {
+                return resultSoFar + createErrorMessage("nurses", "ParseException");
             } catch (StaffClockedInException e) {
-                return resultSoFar + "An error occurred while loading the nurses file - No nurses loaded.<br><br>";
+                return resultSoFar + createErrorMessage("nurses", "StaffClockedInException");
             }
         }
 
         // MODIFIES: ActiveStaff
-        // EFFECTS: Loads other staff from OTHER_STAFF_FILE if the file exists
+        // EFFECTS: Loads other staff from OTHER_STAFF_FILE if the file exists and clocks them in
         private String loadOtherStaff(String resultSoFar) {
             try {
-                List<Staff> staff = Reader.readOtherStaff(new File(OTHER_STAFF_FILE));
+                List<Staff> staff = Decoder.decodeOtherStaff(new File(OTHER_STAFF_FILE_PATH));
                 for (Staff s: staff) {
                     String shift = s.getShift();
                     ActiveStaff.getInstance().clockIn(s, shift);
                 }
                 return resultSoFar + "All other staff loaded.";
             } catch (IOException e) {
-                return resultSoFar + "Other staff file not found - No other staff loaded";
+                return resultSoFar + createErrorMessage("other staff", "IOException");
+            } catch (ParseException e) {
+                return resultSoFar + createErrorMessage("other staff", "ParseException");
             } catch (StaffClockedInException e) {
-                return resultSoFar + "An error occurred while loading the other staff file - No other staff loaded.<br>"
-                        + "<br>";
+                return resultSoFar + createErrorMessage("other staff", "StaffClockedInException");
             }
+        }
+
+        // EFFECTS: Creates exception notification message
+        private String createErrorMessage(String personType, String exceptionType) {
+            String message = "An error occurred while loading the " + personType + " file. "
+                    + "(" + exceptionType + ")";
+            if (!personType.equals("other staff")) {
+                message = message + "<br><br>";
+            }
+            return message;
         }
     }
 }

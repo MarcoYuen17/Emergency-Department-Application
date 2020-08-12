@@ -1,4 +1,4 @@
-package persistence;
+package deprecated.persistence;
 
 import java.io.PrintWriter;
 

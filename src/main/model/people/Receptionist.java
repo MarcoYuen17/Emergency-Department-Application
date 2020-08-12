@@ -1,6 +1,6 @@
 package model.people;
 
-import persistence.Saveable;
+import deprecated.persistence.Saveable;
 
 /**
  * Represents a receptionist in the Emergency Department

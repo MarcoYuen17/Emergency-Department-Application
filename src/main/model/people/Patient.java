@@ -1,8 +1,8 @@
 package model.people;
 
 import model.rooms.Room;
-import persistence.Reader;
-import persistence.Saveable;
+import deprecated.persistence.Reader;
+import deprecated.persistence.Saveable;
 
 import java.io.PrintWriter;
 
@@ -24,7 +24,7 @@ public class Patient extends Person implements Saveable {
     private int roomNumberToAssign;
 
     // EFFECTS: Constructs new patient with parameters in order
-    public Patient(String firstName, String lastName, int dob, int id, int timeIn, //TODO: Use built-in Time?
+    public Patient(String firstName, String lastName, int dob, int id, int timeIn,
                    int urgency, String reasonForVisit, String precautions, String allergies, String medications) {
 
         room = null;
@@ -58,7 +58,7 @@ public class Patient extends Person implements Saveable {
         this.precautions = precautions;
         this.allergies = allergies;
         this.medications = medications;
-        this.roomNumberToAssign = roomNumberToAssign; //TODO: instead just assign patient to room
+        this.roomNumberToAssign = roomNumberToAssign;
     }
 
     // EFFECTS: Returns patient's room

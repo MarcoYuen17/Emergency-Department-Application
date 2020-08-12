@@ -1,8 +1,8 @@
 package model.people;
 
 import model.rooms.Room;
-import persistence.Reader;
-import persistence.Saveable;
+import deprecated.persistence.Reader;
+import deprecated.persistence.Saveable;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
