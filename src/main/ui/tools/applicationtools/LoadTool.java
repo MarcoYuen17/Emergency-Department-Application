@@ -1,6 +1,6 @@
 package ui.tools.applicationtools;
 
-import json.persistence.Decoder;
+import persistence.Decoder;
 import model.ActiveStaff;
 import model.CheckedInPatients;
 import model.exceptions.PatientCheckedInException;

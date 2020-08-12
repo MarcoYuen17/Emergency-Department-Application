@@ -1,4 +1,4 @@
-package json.persistence;
+package persistence;
 
 import model.people.Nurse;
 import model.people.Patient;

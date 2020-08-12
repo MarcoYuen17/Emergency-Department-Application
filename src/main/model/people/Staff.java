@@ -1,15 +1,10 @@
 package model.people;
 
-import deprecated.persistence.Reader;
-import deprecated.persistence.Saveable;
-
-import java.io.PrintWriter;
-
 /**
  * Represents a staff member in the Emergency Department
  */
 
-public class Staff extends Person implements Saveable {
+public class Staff extends Person {
 
     protected String shift;
     protected String position;
@@ -57,17 +52,6 @@ public class Staff extends Person implements Saveable {
     // EFFECTS: Returns position
     public String getPosition() {
         return position;
-    }
-
-    @Override
-    public void save(PrintWriter printWriter) {
-        printWriter.print(position);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(firstName);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(lastName);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(shift);
     }
 
     @Override

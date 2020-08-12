@@ -1,12 +1,10 @@
 package model.people;
 
-import deprecated.persistence.Saveable;
-
 /**
  * Represents a doctor in the Emergency Department
  */
 
-public class Doctor extends MedicalStaff implements Saveable {
+public class Doctor extends MedicalStaff {
 
     // EFFECTS: Constructs a new doctor with first name and last name with Doctor position
     public Doctor(String firstName, String lastName) {

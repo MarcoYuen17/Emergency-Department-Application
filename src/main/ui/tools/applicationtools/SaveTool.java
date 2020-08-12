@@ -1,6 +1,6 @@
 package ui.tools.applicationtools;
 
-import json.persistence.Encoder;
+import persistence.Encoder;
 import model.ActiveStaff;
 import model.CheckedInPatients;
 import ui.EmergencyDepartment;

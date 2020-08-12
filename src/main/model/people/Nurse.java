@@ -1,17 +1,14 @@
 package model.people;
 
 import model.rooms.Room;
-import deprecated.persistence.Reader;
-import deprecated.persistence.Saveable;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
  * Represents a nurse in the Emergency Department
  */
 
-public class Nurse extends MedicalStaff implements Saveable {
+public class Nurse extends MedicalStaff {
 
     private ArrayList<Room> assignedRooms;
     private ArrayList<Integer> roomNumbersToAssign;
@@ -56,23 +53,5 @@ public class Nurse extends MedicalStaff implements Saveable {
     // EFFECTS: Returns list of assigned rooms
     public ArrayList<Room> findAssignedRooms() {
         return assignedRooms;
-    }
-
-    @Override
-    public void save(PrintWriter printWriter) {
-        printWriter.print(firstName);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(lastName);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(shift);
-        printWriter.print(Reader.DELIMITER);
-        if (assignedRooms.size() == 0) {
-            printWriter.print(0);
-        } else {
-            for (Room r: assignedRooms) {
-                printWriter.print(r.getRoomNumber());
-                printWriter.print(Reader.ROOM_DELIMITER);
-            }
-        }
     }
 }

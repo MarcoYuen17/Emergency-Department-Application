@@ -1,4 +1,4 @@
-package json.persistence;
+package persistence;
 
 import model.people.*;
 import org.json.simple.JSONArray;

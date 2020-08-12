@@ -10,7 +10,6 @@ public class Main {
     }
 }
 
-//TODO: remove deprecated persistence
 //TODO: add dropdown menus for checkins & clockins
 //TODO: increase GUI font sizes
 //TODO: update README

@@ -1,10 +1,11 @@
-package json.persistence;
+package persistence;
 
 import model.people.Nurse;
 import model.people.Patient;
 import model.people.Staff;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
+import persistence.Decoder;
 
 import java.io.File;
 import java.io.IOException;
