@@ -43,19 +43,21 @@ public class StaffClockOutTool extends Tool {
 
     private class StaffClockOutToolClickHandler extends ToolClickHandler implements ActionListener {
 
-        private JTextField positionField;
+        private JComboBox<String> positionDropDownBox;
         private JTextField firstNameField;
         private JTextField lastNameField;
 
-        private JLabel positionFieldLabel = new JLabel("Enter Staff Member's Position:");
-        private JLabel positionOptionsFieldLabel = new JLabel("(Nurse/Doctor/Receptionist)");
+        private JLabel positionInputLabel = new JLabel("Select Staff Member's Position:");
         private JLabel firstNameFieldLabel = new JLabel("Enter First Name:");
         private JLabel lastNameFieldLabel = new JLabel("Enter Last Name:");
 
         public StaffClockOutToolClickHandler() {
             btn = new JButton("Clock Out");
             btn.setActionCommand("clockOutStaff");
-            positionField = new JTextField(10);
+            positionDropDownBox = new JComboBox<>();
+            positionDropDownBox.addItem("Nurse");
+            positionDropDownBox.addItem("Doctor");
+            positionDropDownBox.addItem("Receptionist");
             firstNameField = new JTextField(15);
             lastNameField = new JTextField(15);
             label = new JLabel("");
@@ -71,9 +73,8 @@ public class StaffClockOutTool extends Tool {
             staffClockOutToolFrame.setPreferredSize(new Dimension(500, 325));
             staffClockOutToolFrame.setLayout(new FlowLayout());
             staffClockOutToolFrame.add(new JLabel(blankLineLabelText));
-            staffClockOutToolFrame.add(positionFieldLabel);
-            staffClockOutToolFrame.add(positionOptionsFieldLabel);
-            staffClockOutToolFrame.add(positionField);
+            staffClockOutToolFrame.add(positionInputLabel);
+            staffClockOutToolFrame.add(positionDropDownBox);
             staffClockOutToolFrame.add(new JLabel(blankLineLabelText));
             staffClockOutToolFrame.add(firstNameFieldLabel);
             staffClockOutToolFrame.add(firstNameField);
@@ -103,7 +104,7 @@ public class StaffClockOutTool extends Tool {
             // EFFECTS: Clocks out staff member according to text fields
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clockOutStaff")) {
-                    String position = positionField.getText();
+                    String position = (String) positionDropDownBox.getSelectedItem();
                     String firstName = firstNameField.getText();
                     String lastName = lastNameField.getText();
                     String result;
@@ -121,7 +122,7 @@ public class StaffClockOutTool extends Tool {
                 staffToClockOut.setPosition(position);
                 try {
                     ActiveStaff.getInstance().clockOut(staffToClockOut);
-                    if (position.equals("Nurse")) {
+                    if (position.equals("Nurse")) { //TODO: Move to clockOut()
                         for (Nurse nurse : activeNurses) {
                             if (nurse.getFullName().equals(staffToClockOut.getFullName())) {
                                 List<Room> roomsToRemoveNurse = nurse.findAssignedRooms();
@@ -142,7 +143,6 @@ public class StaffClockOutTool extends Tool {
             // MODIFIES: this
             // EFFECTS: Clears input fields
             private void clearTextFields() {
-                clearTextField(positionField);
                 clearTextField(firstNameField);
                 clearTextField(lastNameField);
             }

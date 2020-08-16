@@ -45,7 +45,7 @@ public class PatientCheckInTool extends Tool {
         private JTextField patientDobField;
         private JTextField patientIDField;
         private JTextField patientTimeInField;
-        private JTextField patientUrgencyField;
+        private JComboBox<Integer> patientUrgencyDropDownBox;
         private JTextField patientReasonField;
         private JTextField patientPrecautionsField;
         private JTextField patientAllergiesField;
@@ -56,7 +56,7 @@ public class PatientCheckInTool extends Tool {
         private JLabel patientDobFieldLabel = new JLabel("Enter the Patient's Date of Birth in YYYYMMDD:");
         private JLabel patientIDFieldLabel = new JLabel("Enter the Patient's Health ID:");
         private JLabel patientTimeInFieldLabel = new JLabel("Enter the Current Time:  (24hr)");
-        private JLabel patientUrgencyFieldLabel = new JLabel("Enter the Patient's Urgency:  (1 = low, 2 = moderate"
+        private JLabel patientUrgencyInputLabel = new JLabel("Select the Patient's Urgency:  (1 = low, 2 = moderate"
                 + ", 3 = high)");
         private JLabel patientReasonFieldLabel = new JLabel("Enter the Patient's Reason for Visit:");
         private JLabel patientPrecautionsFieldLabel = new JLabel("Enter the Patient's Recommended Precautions:");
@@ -73,7 +73,10 @@ public class PatientCheckInTool extends Tool {
             patientDobField = new JTextField(10);
             patientIDField = new JTextField(10);
             patientTimeInField = new JTextField(10);
-            patientUrgencyField = new JTextField(2);
+            patientUrgencyDropDownBox = new JComboBox<>();
+            patientUrgencyDropDownBox.addItem(1);
+            patientUrgencyDropDownBox.addItem(2);
+            patientUrgencyDropDownBox.addItem(3);
             patientReasonField = new JTextField(30);
             patientPrecautionsField = new JTextField(10);
             patientAllergiesField = new JTextField(20);
@@ -117,8 +120,8 @@ public class PatientCheckInTool extends Tool {
             window.add(patientIDField);
             window.add(patientTimeInFieldLabel);
             window.add(patientTimeInField);
-            window.add(patientUrgencyFieldLabel);
-            window.add(patientUrgencyField);
+            window.add(patientUrgencyInputLabel);
+            window.add(patientUrgencyDropDownBox);
             window.add(patientReasonFieldLabel);
             window.add(patientReasonField);
             window.add(patientPrecautionsFieldLabel);
@@ -153,7 +156,7 @@ public class PatientCheckInTool extends Tool {
                     int dob = Integer.parseInt(patientDobField.getText());
                     int id = Integer.parseInt(patientIDField.getText());
                     int timeCheckedIn = Integer.parseInt(patientTimeInField.getText());
-                    int urgency = Integer.parseInt(patientUrgencyField.getText());
+                    int urgency = (Integer) patientUrgencyDropDownBox.getSelectedItem();
                     String reason = patientReasonField.getText();
                     String precautions = patientPrecautionsField.getText();
                     String allergies = patientAllergiesField.getText();
@@ -193,7 +196,6 @@ public class PatientCheckInTool extends Tool {
                 clearTextField(patientDobField);
                 clearTextField(patientIDField);
                 clearTextField(patientTimeInField);
-                clearTextField(patientUrgencyField);
                 clearTextField(patientReasonField);
                 clearTextField(patientPrecautionsField);
                 clearTextField(patientAllergiesField);

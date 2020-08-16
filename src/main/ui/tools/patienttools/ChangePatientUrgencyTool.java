@@ -38,16 +38,19 @@ public class ChangePatientUrgencyTool extends Tool {
     private class ChangePatientUrgencyToolClickHandler extends ToolClickHandler implements ActionListener {
 
         private JTextField patientIDField;
-        private JTextField newUrgencyField;
+        private JComboBox<Integer> urgencyDropDownBox;
 
-        private static final int MIN_URGENCY = 1;
+        private static final int MIN_URGENCY = 1; //TODO: Move to Patient class?
         private static final int MAX_URGENCY = 3;
 
         public ChangePatientUrgencyToolClickHandler() {
             btn = new JButton("Change Urgency");
             btn.setActionCommand("changeUrgency");
             patientIDField = new JTextField(10);
-            newUrgencyField = new JTextField(10);
+            urgencyDropDownBox = new JComboBox<>();
+            urgencyDropDownBox.addItem(1);
+            urgencyDropDownBox.addItem(2);
+            urgencyDropDownBox.addItem(3);
             label = new JLabel("");
             addToolFrameListener();
         }
@@ -61,13 +64,13 @@ public class ChangePatientUrgencyTool extends Tool {
             changePatientUrgencyToolFrame.setPreferredSize(new Dimension(325, 250));
             changePatientUrgencyToolFrame.setLayout(new FlowLayout());
             JLabel patientIDFieldLabel = new JLabel("Enter ID of Patient:");
-            JLabel newUrgencyFieldLabel = new JLabel("Enter New Urgency: (" + MIN_URGENCY + " - " + MAX_URGENCY
+            JLabel newUrgencyInputLabel = new JLabel("Select New Urgency: (" + MIN_URGENCY + " - " + MAX_URGENCY
                     + ")");
             changePatientUrgencyToolFrame.add(new JLabel(blankLineLabelText));
             changePatientUrgencyToolFrame.add(patientIDFieldLabel);
             changePatientUrgencyToolFrame.add(patientIDField);
-            changePatientUrgencyToolFrame.add(newUrgencyFieldLabel);
-            changePatientUrgencyToolFrame.add(newUrgencyField);
+            changePatientUrgencyToolFrame.add(newUrgencyInputLabel);
+            changePatientUrgencyToolFrame.add(urgencyDropDownBox);
             changePatientUrgencyToolFrame.add(btn);
             changePatientUrgencyToolFrame.add(new JLabel(blankLineLabelText));
             changePatientUrgencyToolFrame.add(label);
@@ -91,7 +94,8 @@ public class ChangePatientUrgencyTool extends Tool {
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("changeUrgency")) {
                     int patientIDToUpdate = Integer.parseInt(patientIDField.getText());
-                    int newUrgency = Integer.parseInt(newUrgencyField.getText());
+//                    int newUrgency = Integer.parseInt(newUrgencyField.getText());
+                    int newUrgency = (Integer) urgencyDropDownBox.getSelectedItem();
                     String result = changePatientUrgency(patientIDToUpdate, newUrgency);
                     label.setText(result);
                     Toolkit.getDefaultToolkit().beep();
@@ -119,7 +123,6 @@ public class ChangePatientUrgencyTool extends Tool {
             // EFFECTS: Clears input fields
             private void clearTextFields() {
                 clearTextField(patientIDField);
-                clearTextField(newUrgencyField);
             }
         }
     }

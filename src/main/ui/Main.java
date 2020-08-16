@@ -10,6 +10,6 @@ public class Main {
     }
 }
 
-//TODO: add dropdown menus for checkins & clockins
 //TODO: increase GUI font sizes
 //TODO: update README
+//TODO: add regex for GUI inputs

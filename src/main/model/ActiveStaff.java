@@ -14,7 +14,7 @@ public class ActiveStaff {
 
     private static ActiveStaff instance = null;
     private ArrayList<Staff> listOfActiveStaff;
-    public static ArrayList<Nurse> activeNurses;
+    public static ArrayList<Nurse> activeNurses; //TODO: Make others use getListOfActiveNurses()
 
     // EFFECTS: Constructs new active staff lists
     private ActiveStaff() {
@@ -48,7 +48,7 @@ public class ActiveStaff {
         staff.setShift(shift);
         listOfActiveStaff.add(staff);
 
-        if (staff.getPosition().equals("Nurse")) {
+        if (staff.getPosition().equals("Nurse")) { //TODO: Check code coverage?
             activeNurses.add((Nurse) staff);
         }
     }

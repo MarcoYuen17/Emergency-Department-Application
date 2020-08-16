@@ -15,8 +15,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static model.ActiveStaff.activeNurses;
-
 /**
  * Represents a GUI tool to clock in a staff member
  */
@@ -42,13 +40,12 @@ public class StaffClockInTool extends Tool {
 
     private class StaffClockInToolClickHandler extends ToolClickHandler implements ActionListener {
 
-        private JTextField positionField;
+        private JComboBox<String> positionDropDownBox;
         private JTextField firstNameField;
         private JTextField lastNameField;
         private JTextField shiftField;
 
-        private JLabel positionFieldLabel = new JLabel("Enter Staff Member's Position:");
-        private JLabel positionOptionsFieldLabel = new JLabel("(Nurse/Doctor/Receptionist)");
+        private JLabel positionInputLabel = new JLabel("Select Staff Member's Position:");
         private JLabel firstNameFieldLabel = new JLabel("Enter First Name:");
         private JLabel lastNameFieldLabel = new JLabel("Enter Last Name:");
         private JLabel shiftFieldLabel = new JLabel("Enter shift: (24hr-24hr)");
@@ -56,7 +53,10 @@ public class StaffClockInTool extends Tool {
         public StaffClockInToolClickHandler() {
             btn = new JButton("Clock In");
             btn.setActionCommand("clockInStaff");
-            positionField = new JTextField(10);
+            positionDropDownBox = new JComboBox<>();
+            positionDropDownBox.addItem("Nurse");
+            positionDropDownBox.addItem("Doctor");
+            positionDropDownBox.addItem("Receptionist");
             firstNameField = new JTextField(15);
             lastNameField = new JTextField(15);
             shiftField = new JTextField(10);
@@ -83,9 +83,8 @@ public class StaffClockInTool extends Tool {
         // EFFECTS: Adds all staff text fields and labels describing the text fields
         private void addLabelsAndFields(JFrame window) {
             window.add(new JLabel(blankLineLabelText));
-            window.add(positionFieldLabel);
-            window.add(positionOptionsFieldLabel);
-            window.add(positionField);
+            window.add(positionInputLabel);
+            window.add(positionDropDownBox);
             window.add(new JLabel(blankLineLabelText));
             window.add(firstNameFieldLabel);
             window.add(firstNameField);
@@ -114,7 +113,7 @@ public class StaffClockInTool extends Tool {
             // EFFECTS: Clocks in staff member according to text fields
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("clockInStaff")) {
-                    String position = positionField.getText();
+                    String position = (String) positionDropDownBox.getSelectedItem();
                     String firstName = firstNameField.getText();
                     String lastName = lastNameField.getText();
                     String shift = shiftField.getText();
@@ -155,7 +154,6 @@ public class StaffClockInTool extends Tool {
             // MODIFIES: this
             // EFFECTS: Clears input fields
             private void clearTextFields() {
-                clearTextField(positionField);
                 clearTextField(firstNameField);
                 clearTextField(lastNameField);
                 clearTextField(shiftField);
