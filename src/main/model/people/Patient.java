@@ -19,6 +19,9 @@ public class Patient extends Person {
     private String medications;
     private int roomNumberToAssign;
 
+    public static final int MIN_URGENCY = 1;
+    public static final int MAX_URGENCY = 3;
+
     // EFFECTS: Constructs new patient with parameters in order
     public Patient(String firstName, String lastName, int dob, int id, int timeIn,
                    int urgency, String reasonForVisit, String precautions, String allergies, String medications) {
@@ -144,7 +147,7 @@ public class Patient extends Person {
     }
 
     // EFFECTS: Returns room number for saving
-    public int printRoomNumberToSave() { //TODO: Needed?
+    public int printRoomNumberToSave() {
         if (room == null) {
             return 0;
         } else {
@@ -153,7 +156,7 @@ public class Patient extends Person {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o) { //TODO: Uncomment
         if (this == o) {
             return true;
         }

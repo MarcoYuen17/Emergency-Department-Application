@@ -5,6 +5,7 @@ import model.people.Doctor;
 import model.people.Nurse;
 import model.people.Receptionist;
 import model.people.Staff;
+import model.rooms.Room;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,9 @@ public class ActiveStaffTest {
     private Doctor testDoctorSameName;
     private Receptionist testReceptionist;
     private ActiveStaff testActiveStaff;
+    private Room testRoom1;
+    private Room testRoom2;
+    private Room testRoom3;
 
     @BeforeEach
     public void runBefore() {
@@ -32,6 +36,9 @@ public class ActiveStaffTest {
         testDoctor = new Doctor("Docty", "Doc");
         testDoctorSameName = new Doctor("Docty", "Doc");
         testReceptionist = new Receptionist("Clerky", "Clerk");
+        testRoom1 = new Room(1);
+        testRoom2 = new Room(2);
+        testRoom3 = new Room(3);
 
         ActiveStaff.resetInstance();
         testActiveStaff = ActiveStaff.getInstance();
@@ -45,6 +52,8 @@ public class ActiveStaffTest {
 
     @Test
     public void testClockInAndClockOut() {
+        Nurse anotherTestNurse = new Nurse("x", "y");
+        Nurse finalNurse = new Nurse("1", "2");
         try {
             testActiveStaff.clockIn(testNurse, "0700-1500");
         } catch (StaffClockedInException e) {
@@ -66,7 +75,13 @@ public class ActiveStaffTest {
         } catch (StaffClockedInException e) {
             // expected
         }
-        assertEquals(3, testActiveStaff.staffPower());
+        try {
+            testActiveStaff.clockIn(anotherTestNurse, "0000-0800");
+        } catch (StaffClockedInException e) {
+            fail("StaffClockedInException was thrown");
+        }
+        assertEquals(4, testActiveStaff.staffPower());
+        assertEquals(2, testActiveStaff.getListOfActiveNurses().size());
         try {
             testActiveStaff.clockOut(testDoctor);
         } catch (StaffClockedInException e) {
@@ -78,12 +93,39 @@ public class ActiveStaffTest {
         } catch (StaffClockedInException e) {
             // expected
         }
+        anotherTestNurse.setAssignedRoom(testRoom1);
+        anotherTestNurse.setAssignedRoom(testRoom2);
         try {
-            testActiveStaff.clockOut(testNurse);
+            testActiveStaff.clockOut(anotherTestNurse);
         } catch (StaffClockedInException e) {
             fail("StaffClockedInException was thrown");
         }
+        assertEquals(2, testActiveStaff.staffPower());
+        assertEquals(1, testActiveStaff.getListOfActiveNurses().size());
+        assertNull(testRoom1.getNurse());
+        assertNull(testRoom2.getNurse());
+        try {
+            testActiveStaff.clockOut(testNurse);
+        } catch(StaffClockedInException e) {
+            fail("StaffClockedInException was thrown");
+        }
+        try {
+            testActiveStaff.clockOut(testReceptionist);
+        } catch (StaffClockedInException e) {
+            fail("StaffClockedOutException was thrown");
+        }
+
+        // Scenario when there is a nurse in activeStaff but activeNurses is empty:
+        testActiveStaff.getListOfActiveStaff().add(finalNurse);
         assertEquals(1, testActiveStaff.staffPower());
+        assertEquals(0, testActiveStaff.getListOfActiveNurses().size());
+        try {
+            testActiveStaff.clockOut(finalNurse);
+        } catch (StaffClockedInException e) {
+            fail("StaffClockedInException was thrown");
+        }
+        assertEquals(0, testActiveStaff.staffPower());
+        assertEquals(0, testActiveStaff.getListOfActiveNurses().size());
     }
 
     @Test
@@ -134,11 +176,17 @@ public class ActiveStaffTest {
         } catch (StaffClockedInException e) {
             fail("StaffClockedInException was thrown.");
         }
-
         List<Nurse> activeNurses = testActiveStaff.getListOfActiveNurses();
         assertEquals(2, activeNurses.size());
         assertEquals(testNurse, activeNurses.get(0));
         assertEquals(anotherNurse, activeNurses.get(1));
+        try {
+            testActiveStaff.clockOut(testNurse);
+        } catch (StaffClockedInException e) {
+            fail("StaffClockedInException was thrown.");
+        }
+        assertEquals(1, activeNurses.size());
+        assertEquals(anotherNurse, activeNurses.get(0));
     }
 
     @Test

@@ -3,6 +3,8 @@ package model;
 import model.exceptions.StaffClockedInException;
 import model.people.Nurse;
 import model.people.Staff;
+import model.rooms.Room;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class ActiveStaff {
 
     private static ActiveStaff instance = null;
     private ArrayList<Staff> listOfActiveStaff;
-    public static ArrayList<Nurse> activeNurses; //TODO: Make others use getListOfActiveNurses()
+    private ArrayList<Nurse> activeNurses;
 
     // EFFECTS: Constructs new active staff lists
     private ActiveStaff() {
@@ -48,7 +50,7 @@ public class ActiveStaff {
         staff.setShift(shift);
         listOfActiveStaff.add(staff);
 
-        if (staff.getPosition().equals("Nurse")) { //TODO: Check code coverage?
+        if (staff.getPosition().equals("Nurse")) {
             activeNurses.add((Nurse) staff);
         }
     }
@@ -61,6 +63,18 @@ public class ActiveStaff {
             throw new StaffClockedInException(staff.getPosition() + " " + staff.getFullName() + " is not clocked in.");
         }
         listOfActiveStaff.remove(staff);
+        if (staff.getPosition().equals("Nurse")) {
+            for (Nurse nurse : activeNurses) {
+                if (nurse.getFullName().equals(staff.getFullName())) {
+                    List<Room> roomsToRemoveNurse = nurse.findAssignedRooms();
+                    for (Room room : roomsToRemoveNurse) {
+                        room.clearNurse();
+                    }
+                    activeNurses.remove(nurse);
+                    break;
+                }
+            }
+        }
     }
 
     // EFFECTS: Returns shift of staff
@@ -87,7 +101,7 @@ public class ActiveStaff {
     public List<Staff> getListOfActiveOtherStaff() {
         List<Staff> otherStaff = new ArrayList<>();
         for (Staff staff: listOfActiveStaff) {
-            if (staff.getPosition() != "Nurse") {
+            if (!staff.getPosition().equals("Nurse")) {
                 otherStaff.add(staff);
             }
         }

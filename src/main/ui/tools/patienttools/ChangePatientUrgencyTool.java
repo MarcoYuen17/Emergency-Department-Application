@@ -12,6 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static model.people.Patient.MAX_URGENCY;
+import static model.people.Patient.MIN_URGENCY;
+
 /**
  * Represents a GUI tool to change a patient's urgency
  */
@@ -39,9 +42,6 @@ public class ChangePatientUrgencyTool extends Tool {
 
         private JTextField patientIDField;
         private JComboBox<Integer> urgencyDropDownBox;
-
-        private static final int MIN_URGENCY = 1; //TODO: Move to Patient class?
-        private static final int MAX_URGENCY = 3;
 
         public ChangePatientUrgencyToolClickHandler() {
             btn = new JButton("Change Urgency");
@@ -94,7 +94,6 @@ public class ChangePatientUrgencyTool extends Tool {
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("changeUrgency")) {
                     int patientIDToUpdate = Integer.parseInt(patientIDField.getText());
-//                    int newUrgency = Integer.parseInt(newUrgencyField.getText());
                     int newUrgency = (Integer) urgencyDropDownBox.getSelectedItem();
                     String result = changePatientUrgency(patientIDToUpdate, newUrgency);
                     label.setText(result);

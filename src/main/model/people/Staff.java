@@ -60,7 +60,7 @@ public class Staff extends Person {
         if (this == o) {
             return true;
         }
-//        if (!(o instanceof Staff)) {
+//        if (!(o instanceof Staff)) { //TODO: Uncomment
 //            return false;
 //        }
 

@@ -58,7 +58,10 @@ public class ShowNextPatientNeedsRoomTool extends Tool {
         // EFFECTS: Shows full name and id of next patient without room
         //          with highest urgency who has waited for longest time
         public String showNextPatient() {
-            Patient next = CheckedInPatients.getInstance().nextPatientWithoutRoom(); //TODO: Return null if no waiting patients
+            Patient next = CheckedInPatients.getInstance().nextPatientWithoutRoom();
+            if (next == null) {
+                return "No Waiting Patients";
+            }
             String nextName = next.getFullName();
             int nextID = next.getID();
             return "Next Patient: " + nextName + " - " + nextID;

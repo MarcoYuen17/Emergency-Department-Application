@@ -3,7 +3,6 @@ package model;
 import model.exceptions.PatientCheckedInException;
 import model.people.Patient;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -74,6 +73,9 @@ public class CheckedInPatients {
                     && p.getTimeCheckedIn() < next.getTimeCheckedIn())) {
                 next = p;
             }
+        }
+        if (checkedInPatients.size() == 0 || next.getFullName().equals("No Patients")) {
+            return null;
         }
         return next;
     }

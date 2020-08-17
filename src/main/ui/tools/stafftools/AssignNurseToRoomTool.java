@@ -1,5 +1,6 @@
 package ui.tools.stafftools;
 
+import model.ActiveStaff;
 import model.people.Nurse;
 import model.rooms.Room;
 import ui.EmergencyDepartment;
@@ -12,7 +13,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static model.ActiveStaff.activeNurses;
 import static model.rooms.Room.*;
 
 /**
@@ -111,7 +111,7 @@ public class AssignNurseToRoomTool extends Tool {
                 if (isRoomNumIllegal(roomNum)) {
                     return ERROR_ROOM_DOES_NOT_EXIST;
                 }
-                for (Nurse nurse: activeNurses) {
+                for (Nurse nurse: ActiveStaff.getInstance().getListOfActiveNurses()) {
                     if (nurse.getFullName().equals(firstName + " " + lastName)) {
                         for (Room room: allRooms) {
                             if (room.getRoomNumber() == roomNum) {

@@ -2,9 +2,7 @@ package ui.tools.stafftools;
 
 import model.ActiveStaff;
 import model.exceptions.StaffClockedInException;
-import model.people.Nurse;
 import model.people.Staff;
-import model.rooms.Room;
 import ui.EmergencyDepartment;
 import ui.tools.Tool;
 import ui.tools.clickhandlers.ToolClickHandler;
@@ -14,9 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
-import static model.ActiveStaff.activeNurses;
 
 /**
  * Represents a GUI tool to clock out a staff member
@@ -122,18 +117,6 @@ public class StaffClockOutTool extends Tool {
                 staffToClockOut.setPosition(position);
                 try {
                     ActiveStaff.getInstance().clockOut(staffToClockOut);
-                    if (position.equals("Nurse")) { //TODO: Move to clockOut()
-                        for (Nurse nurse : activeNurses) {
-                            if (nurse.getFullName().equals(staffToClockOut.getFullName())) {
-                                List<Room> roomsToRemoveNurse = nurse.findAssignedRooms();
-                                for (Room room : roomsToRemoveNurse) {
-                                    room.clearNurse();
-                                }
-                                activeNurses.remove(nurse);
-                                break;
-                            }
-                        }
-                    }
                     return position + " " + firstName + " " + lastName + " has been clocked out.";
                 } catch (StaffClockedInException e) {
                     return "Error: " + e.getMessage();

@@ -89,7 +89,7 @@ public class Decoder {
 
             if (position.equals("Doctor")) {
                 otherStaff.add(new Doctor(firstName, lastName, shift));
-            } else if (position.equals("Receptionist")) {
+            } else {
                 otherStaff.add(new Receptionist(firstName, lastName, shift));
             }
         }

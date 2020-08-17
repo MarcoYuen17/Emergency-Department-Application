@@ -29,6 +29,7 @@ public class CheckedInPatientsTest {
     private Room testRoom4;
     private Room testRoom5;
     private Room testRoom6;
+    private Room testRoom7;
 
     @BeforeEach
     public void runBefore() {
@@ -73,6 +74,7 @@ public class CheckedInPatientsTest {
         testRoom4 = new Room(120);
         testRoom5 = new Room(121);
         testRoom6 = new Room(122);
+        testRoom7 = new Room(123);
     }
 
     @Test
@@ -118,6 +120,7 @@ public class CheckedInPatientsTest {
 
     @Test
     public void testNextPatientWithoutRoom() {
+        assertNull(testCheckedInPatients.nextPatientWithoutRoom());
         try {
             testCheckedInPatients.checkInPatient(testPatient1);
             testCheckedInPatients.checkInPatient(testPatient2);
@@ -140,6 +143,8 @@ public class CheckedInPatientsTest {
         assertEquals(testPatient3, testCheckedInPatients.nextPatientWithoutRoom());
         testPatient3.assignRoom(testRoom3);
         assertEquals(testPatient1, testCheckedInPatients.nextPatientWithoutRoom());
+        testPatient1.assignRoom(testRoom7);
+        assertNull(testCheckedInPatients.nextPatientWithoutRoom());
     }
 
     @Test
