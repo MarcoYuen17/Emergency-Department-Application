@@ -41,7 +41,7 @@ public class EmergencyDepartment extends JFrame {
     private AssignNurseToRoomTool assignNurseToRoomTool;
     private ShowAllClockedInStaffTool showAllClockedInStaffTool;
     private ShowOneNurseRoomsTool showOneNurseRoomsTool;
-    private ShowOneRoomAllInfoTool showOneRoomAllInfoTool;
+    private ShowRoomStatusTool showRoomStatusTool;
     private StaffClockInTool staffClockInTool;
     private StaffClockOutTool staffClockOutTool;
     private ShowAllOnePatientInfoTool showAllOnePatientInfoTool;
@@ -85,7 +85,7 @@ public class EmergencyDepartment extends JFrame {
         changePatientUrgencyTool = new ChangePatientUrgencyTool(this, toolArea);
         dischargePatientTool = new DischargePatientTool(this, toolArea);
         showAllOnePatientInfoTool = new ShowAllOnePatientInfoTool(this, toolArea);
-        showOneRoomAllInfoTool = new ShowOneRoomAllInfoTool(this, toolArea);
+        showRoomStatusTool = new ShowRoomStatusTool(this, toolArea);
         assignNurseToRoomTool = new AssignNurseToRoomTool(this, toolArea);
         showOneNurseRoomsTool = new ShowOneNurseRoomsTool(this, toolArea);
         showAllClockedInStaffTool = new ShowAllClockedInStaffTool(this, toolArea);

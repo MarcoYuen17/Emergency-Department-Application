@@ -20,16 +20,16 @@ import static model.rooms.Room.*;
  * Represents a GUI tool to show all relevant information of a room
  */
 
-public class ShowOneRoomAllInfoTool extends Tool {
+public class ShowRoomStatusTool extends Tool {
 
-    public ShowOneRoomAllInfoTool(EmergencyDepartment ed, JComponent parent) {
+    public ShowRoomStatusTool(EmergencyDepartment ed, JComponent parent) {
         super(ed, parent);
     }
 
     @Override
     // EFFECTS: returns string for label
     protected String getLabel() {
-        return "Show All of a Room's Information";
+        return "Show a Room's Status";
     }
 
     @Override

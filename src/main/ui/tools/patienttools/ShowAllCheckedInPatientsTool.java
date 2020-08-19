@@ -22,7 +22,7 @@ public class ShowAllCheckedInPatientsTool extends Tool {
     @Override
     // EFFECTS: returns string for label
     protected String getLabel() {
-        return "Show All Checked In Patients";
+        return "<html>Show All Checked <br>In Patients</html>";
     }
 
     @Override

@@ -25,7 +25,7 @@ public class ShowNextPatientNeedsRoomTool extends Tool {
     @Override
     // EFFECTS: returns string for label
     protected String getLabel() {
-        return "Show Next Patient Who Needs a Room";
+        return "<html>Show Next Patient <br>Who Needs a Room</html>";
     }
 
     @Override

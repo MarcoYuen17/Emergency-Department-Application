@@ -3,6 +3,7 @@ package ui.tools;
 import ui.EmergencyDepartment;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Abstract class to represent GUI tools
@@ -34,6 +35,9 @@ public abstract class Tool {
         button.setBorderPainted(true);
         button.setFocusPainted(true);
         button.setContentAreaFilled(true);
+
+        button.setFont(new Font("Arial", Font.PLAIN, 18));
+
         return button;
     }
 

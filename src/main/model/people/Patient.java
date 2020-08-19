@@ -156,21 +156,21 @@ public class Patient extends Person {
     }
 
     @Override
-    public boolean equals(Object o) { //TODO: Uncomment
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-//        if (o == null || getClass() != o.getClass()) {
-//            return false;
-//        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Patient patient = (Patient) o;
 
         return id == patient.id;
     }
 
-//    @Override
-//    public int hashCode() {
-//        return id;
-//    }
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

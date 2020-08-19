@@ -55,14 +55,13 @@ public class Staff extends Person {
     }
 
     @Override
-    // NOTE: Lines below have been commented out to preserve code coverage (They were not used)
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-//        if (!(o instanceof Staff)) { //TODO: Uncomment
-//            return false;
-//        }
+        if (!(o instanceof Staff)) {
+            return false;
+        }
 
         Staff staff = (Staff) o;
 
@@ -72,10 +71,10 @@ public class Staff extends Person {
         return fullName.equals(staff.fullName);
     }
 
-//    @Override
-//    public int hashCode() {
-//        int result = position != null ? position.hashCode() : 0;
-//        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
-//        return result;
-//    }
+    @Override
+    public int hashCode() {
+        int result = position != null ? position.hashCode() : 0;
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        return result;
+    }
 }

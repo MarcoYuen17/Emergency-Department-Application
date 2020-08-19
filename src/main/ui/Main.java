@@ -10,6 +10,5 @@ public class Main {
     }
 }
 
-//TODO: increase GUI font sizes
 //TODO: update README
 //TODO: add regex for GUI inputs

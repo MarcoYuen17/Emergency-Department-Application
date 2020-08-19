@@ -25,7 +25,7 @@ public class ShowAllOnePatientInfoTool extends Tool {
     @Override
     // EFFECTS: returns string for label
     protected String getLabel() {
-        return "Show All Of One Patient's Information";
+        return "<html>Show All Of One <br>Patient's Information</html>";
     }
 
     @Override
