@@ -9,6 +9,3 @@ public class Main {
         new EmergencyDepartment();
     }
 }
-
-//TODO: update README
-//TODO: add regex for GUI inputs
