@@ -2,10 +2,10 @@
 - Models a hospital's emergency department with patients, nurses, doctors, receptionists, and rooms as objects
 - To be used by hospital staff
 
-####Main screen:
+#### Main screen:
 ![](data/ED_main_screen.png "Main Screen")
 
-####Example check-in:
+#### Example check-in:<br>
 ![](data/ED_example_patient_check_in.png "Example patient check-in")
 
 ## Motivations
